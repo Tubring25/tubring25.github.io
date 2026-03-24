@@ -1,5 +1,5 @@
 import { defineDocumentType, ComputedFields, makeSource } from 'contentlayer/source-files'
-import { writeFileSync } from 'fs'
+import { readFileSync, writeFileSync } from 'fs'
 import readingTime from 'reading-time'
 import GithubSlugger from 'github-slugger'
 import path from 'path'
@@ -73,6 +73,17 @@ function createSearchIndex(allBlogs) {
     )
     console.log('Local search index generated...')
   }
+}
+
+function readGeneratedCollection<T>(collection: 'Blog' | 'Authors'): T[] {
+  const generatedPath = path.join(root, '.contentlayer', 'generated', collection, '_index.json')
+  return JSON.parse(readFileSync(generatedPath, 'utf8')) as T[]
+}
+
+function syncGeneratedArtifacts() {
+  const allBlogs = readGeneratedCollection('Blog')
+  createTagCount(allBlogs)
+  createSearchIndex(allBlogs)
 }
 
 export const Blog = defineDocumentType(() => ({
@@ -150,9 +161,7 @@ export default makeSource({
       rehypePresetMinify,
     ],
   },
-  onSuccess: async (importData) => {
-    const { allBlogs } = await importData()
-    createTagCount(allBlogs)
-    createSearchIndex(allBlogs)
+  onSuccess: async () => {
+    syncGeneratedArtifacts()
   },
 })

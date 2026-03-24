@@ -9,14 +9,6 @@ import Link from '@/components/Link'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 
-const DEFAULT_IMAGES = [
-  'city.jpg',
-  'jinjia.jpg',
-  'kyoto.jpg',
-  'osaka.jpg',
-  'shinjuku.jpg',
-  'tokyo.jpg',
-]
 interface PaginationProps {
   totalPages: number
   currentPage: number
@@ -46,7 +38,7 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
           <Link
             href={currentPage - 1 === 1 ? `/${basePath}/` : `/${basePath}/page/${currentPage - 1}`}
             rel="prev"
-            className="hover:text-primary-500 transition delay-100 hover:-translate-x-2 duration-200"
+            className="text-slate-700 transition-colors duration-200 hover:text-primary-500 dark:text-slate-300 dark:hover:text-primary-400"
           >
             Previous
           </Link>
@@ -63,7 +55,7 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
           <Link
             href={`/${basePath}/page/${currentPage + 1}`}
             rel="next"
-            className=" hover:text-primary-500 transition delay-100 hover:translate-x-2 duration-200"
+            className="text-slate-700 transition-colors duration-200 hover:text-primary-500 dark:text-slate-300 dark:hover:text-primary-400"
           >
             Next
           </Link>
@@ -90,21 +82,24 @@ export default function ListLayout({
 
   return (
     <>
-      <div className="divide-y divide-slate-200 dark:divide-slate-700">
-        <div className="space-y-2 pb-8 pt-6 md:space-y-5">
-          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-slate-900 dark:text-slate-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-            {title}
-          </h1>
-          <div className="relative max-w-lg">
+      <div className="space-y-10 border-b border-slate-300/80 pb-12 dark:border-slate-800">
+        <div className="space-y-4 pb-4 pt-6 md:space-y-5">
+          <p className="editorial-kicker">Archive</p>
+          <h1 className="text-4xl leading-tight sm:text-5xl md:text-6xl">{title}</h1>
+          <p className="max-w-2xl text-base leading-8 text-slate-600 dark:text-slate-300">
+            A running index of frontend notes, routing experiments, TypeScript exercises, and
+            workflow essays.
+          </p>
+          <div className="relative max-w-xl">
             <input
               aria-label="Search articles"
               type="text"
               onChange={(e) => setSearchValue(e.target.value)}
               placeholder="Search articles"
-              className="block w-full rounded-md border border-slate-300 bg-white px-4 py-2 text-slate-900 focus:border-primary-500 focus:ring-primary-500 dark:border-slate-500 dark:bg-slate-800 dark:text-slate-100"
+              className="block w-full rounded-full border border-slate-300/80 bg-white/50 px-5 py-3 text-sm uppercase tracking-[0.14em] text-slate-700 shadow-[0_10px_35px_rgba(15,23,42,0.05)] focus:border-primary-500 focus:ring-primary-400 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-100 dark:focus:border-primary-400 dark:focus:ring-primary-500"
             />
             <svg
-              className="absolute right-3 top-3 h-5 w-5 text-slate-400 dark:text-slate-300"
+              className="absolute right-4 top-3.5 h-5 w-5 text-slate-400 dark:text-slate-300"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -119,58 +114,45 @@ export default function ListLayout({
             </svg>
           </div>
         </div>
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-8">
+        <div className="grid py-2">
           {!filteredBlogPosts.length && 'No posts found.'}
           {displayPosts.map((post) => {
-            const { slug, date, title, summary, tags, images } = post
+            const { slug, date, title, summary, tags } = post
             return (
-              <li key={slug} className="flex">
-                <article className="flex flex-col justify-between w-full p-4 rounded-lg transition-all duration-300 ease-in-out hover:-translate-y-4 hover:bg-slate-200 hover:dark:bg-slate-900 hover:shadow-lg">
-                  <header>
-                    <div className="aspect-w-16 aspect-h-9 mb-4">
-                      <img
-                        src={
-                          images && images.length > 0
-                            ? images[0]
-                            : `/static/images/default/${
-                                DEFAULT_IMAGES[Math.floor(Math.random() * DEFAULT_IMAGES.length)]
-                              }`
-                        }
-                        alt={title}
-                        className="object-cover w-full rounded-lg md:max-h-40 lg:max-h-60"
-                      />
-                    </div>
-                    <h2 className="text-xl font-bold leading-8 tracking-tight mb-2">
-                      <Link href={`/blog/${slug}`} className="text-slate-900 dark:text-slate-100">
-                        {title}
-                      </Link>
-                    </h2>
-                  </header>
-
-                  <div className="flex-grow overflow-hidden">
-                    <div className="prose max-w-none text-sm text-slate-500 dark:text-slate-400 line-clamp-4">
-                      {summary}
-                    </div>
+              <article
+                key={slug}
+                className="group grid gap-2 border-b border-slate-300/80 bg-transparent py-5 transition-colors duration-200 md:grid-cols-[minmax(0,1fr)_auto] md:items-start md:gap-4 dark:border-slate-800"
+              >
+                <div className="space-y-2">
+                  <h2 className="text-[1.1rem] font-semibold leading-7 tracking-[-0.01em] sm:text-[1.2rem]">
+                    <Link
+                      href={`/blog/${slug}`}
+                      className="text-slate-900 transition duration-200 group-hover:text-primary-500 dark:text-slate-100 dark:group-hover:text-primary-400"
+                    >
+                      {title}
+                    </Link>
+                  </h2>
+                  <p className="max-w-3xl text-[0.85rem] leading-7 text-slate-600 dark:text-slate-300">
+                    {summary}
+                  </p>
+                  <div className="flex flex-wrap gap-2 pt-1">
+                    {tags.map((tag) => (
+                      <Tag key={tag} text={tag} />
+                    ))}
                   </div>
-
-                  <footer className="">
-                    <div className="flex flex-wrap gap-2 mb-2">
-                      {tags.map((tag) => (
-                        <Tag key={tag} text={tag} />
-                      ))}
-                    </div>
-                    <dl>
-                      <dt className="sr-only">Published on</dt>
-                      <dd className="text-sm font-medium text-slate-500 dark:text-slate-400">
-                        <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
-                      </dd>
-                    </dl>
-                  </footer>
-                </article>
-              </li>
+                </div>
+                <div className="md:min-w-[140px] md:text-right">
+                  <dl>
+                    <dt className="sr-only">Published on</dt>
+                    <dd className="text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">
+                      <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
+                    </dd>
+                  </dl>
+                </div>
+              </article>
             )
           })}
-        </ul>
+        </div>
       </div>
       {pagination && pagination.totalPages > 1 && !searchValue && (
         <Pagination currentPage={pagination.currentPage} totalPages={pagination.totalPages} />

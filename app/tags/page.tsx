@@ -11,34 +11,28 @@ export default async function Page() {
   const tagKeys = Object.keys(tagCounts)
   const sortedTags = tagKeys.sort((a, b) => tagCounts[b] - tagCounts[a])
   return (
-    <>
-      <div className="divide-y divide-slate-200 dark:divide-slate-700">
-        <div className="space-y-2 pb-8 pt-6 md:space-y-5">
-          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-slate-900 dark:text-slate-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-            Tags
-          </h1>
-        </div>
-        <div className="flex w-full flex-wrap pt-8">
-          {tagKeys.length === 0 && 'No tags found.'}
-          {sortedTags.map((t) => {
-            return (
-              <div
-                key={t}
-                className="mb-2 mr-5 mt-2 btn-3d-full dark:btn-3d-full text-primary-500 hover:text-primary-800 dark:hover:text-primary-300"
-              >
-                <Tag text={t} />
-                <Link
-                  href={`/tags/${slug(t)}`}
-                  className="-ml-2 text-sm font-semibold uppercase"
-                  aria-label={`View posts tagged ${t}`}
-                >
-                  {` (${tagCounts[t]})`}
-                </Link>
-              </div>
-            )
-          })}
-        </div>
+    <div className="space-y-10 pb-12">
+      <div className="space-y-4 pt-6">
+        <p className="editorial-kicker">Index</p>
+        <h1 className="text-4xl leading-tight sm:text-5xl md:text-6xl">Tags</h1>
+        <p className="max-w-2xl text-base leading-8 text-slate-600 dark:text-slate-300">
+          Browse posts by topic.
+        </p>
       </div>
-    </>
+      <div className="flex flex-wrap gap-3">
+        {tagKeys.length === 0 && 'No tags found.'}
+        {sortedTags.map((t) => (
+          <Link
+            key={t}
+            href={`/tags/${slug(t)}`}
+            className="inline-flex items-center gap-2 rounded-full border border-slate-300/80 px-4 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-primary-500 transition-colors duration-200 hover:border-primary-500 hover:text-primary-700 dark:border-slate-700 dark:text-primary-400 dark:hover:border-primary-400 dark:hover:text-primary-300"
+            aria-label={`View posts tagged ${t}`}
+          >
+            #{t.split(' ').join('-')}
+            <span className="text-slate-400 dark:text-slate-500">{tagCounts[t]}</span>
+          </Link>
+        ))}
+      </div>
+    </div>
   )
 }

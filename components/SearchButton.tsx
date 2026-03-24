@@ -12,9 +12,9 @@ const SearchButton = () => {
 
     return (
       <SearchButtonWrapper aria-label="Search">
-        <div className="flex items-center bg-gray-100 rounded-full px-2 shadow-sm border border-white hover:border translation ease-in-out duration-300 hover:border-primary-500  opacity-70 hover:opacity-100 dark:bg-gray-700 dark:border-gray-700 dark:hover:border-primary-500 dark:hover:opacity-100 dark:hover:bg-gray-300">
+        <div className="group hidden items-center rounded-full border border-slate-300/70 bg-white/60 px-2.5 py-1 shadow-[0_6px_18px_rgba(15,23,42,0.03)] backdrop-blur transition-colors duration-200 hover:border-slate-500 hover:bg-white md:flex dark:border-slate-700 dark:bg-slate-900/70 dark:hover:border-slate-500 dark:hover:bg-slate-900">
           <svg
-            className="w-4 h-4 text-gray-500 mr-2"
+            className="mr-2 h-3.5 w-3.5 text-slate-400 transition-colors duration-200 group-hover:text-slate-700 dark:group-hover:text-slate-100"
             fill="none"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -27,13 +27,13 @@ const SearchButton = () => {
           <input
             type="text"
             placeholder="Search"
-            className="w-20 bg-transparent border-none flex-grow text-sm outline-none text-gray-700 placeholder-gray-500"
+            className="w-24 flex-none border-none bg-transparent text-[0.82rem] text-slate-600 outline-none placeholder:text-slate-400 dark:text-slate-200"
           />
           <div className="flex space-x-1">
-            <kbd className="px-2 py-1 text-xs font-semibold text-gray-900 bg-white border border-gray-200 rounded-lg shadow-outer dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500">
+            <kbd className="rounded-md border border-slate-200 bg-slate-50 px-1.5 py-0.5 text-[0.62rem] font-semibold text-slate-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300">
               ⌘
             </kbd>
-            <kbd className="px-2 py-1 text-xs font-semibold text-gray-900 bg-white border border-gray-200 rounded-lg shadow-outer dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500">
+            <kbd className="rounded-md border border-slate-200 bg-slate-50 px-1.5 py-0.5 text-[0.62rem] font-semibold text-slate-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300">
               K
             </kbd>
           </div>

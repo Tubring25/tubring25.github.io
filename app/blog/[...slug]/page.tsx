@@ -86,13 +86,14 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   const postIndex = sortedCoreContents.findIndex((p) => p.slug === slug)
   if (postIndex === -1) {
     return (
-      <div className="mt-24 text-center">
-        <PageTitle>
-          Under Construction{' '}
-          <span role="img" aria-label="roadwork sign">
-            🚧
-          </span>
-        </PageTitle>
+      <div className="flex flex-col items-start pb-12 pt-12 md:pt-24">
+        <p className="editorial-kicker">Not ready yet</p>
+        <h1 className="mt-3 font-display text-4xl leading-tight text-slate-950 dark:text-slate-50 sm:text-5xl">
+          Under Construction
+        </h1>
+        <p className="mt-4 max-w-md text-[0.95rem] leading-7 text-slate-600 dark:text-slate-300">
+          This post is still being written. Check back soon.
+        </p>
       </div>
     )
   }

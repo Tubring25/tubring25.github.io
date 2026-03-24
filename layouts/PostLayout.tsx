@@ -33,35 +33,29 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
   const { filePath, path, slug, date, title, tags } = content
   const basePath = path.split('/')[0]
 
-  console.log('posts', content)
-
   return (
     <SectionContainer>
       <ScrollTopAndComment />
       <article>
         <div className="xl:divide-y xl:divide-slate-200 xl:dark:divide-slate-700">
           <header className="pt-6 xl:pb-6">
-            <div className="space-y-1 text-center">
-              <dl className="space-y-10">
-                <div>
-                  <dt className="sr-only">Published on</dt>
-                  <dd className="text-base font-medium leading-6 text-slate-500 dark:text-slate-400">
-                    <time dateTime={date}>
-                      {new Date(date).toLocaleDateString(siteMetadata.locale, postDateTemplate)}
-                    </time>
-                  </dd>
-                </div>
+            <div className="space-y-3">
+              <dl>
+                <dt className="sr-only">Published on</dt>
+                <dd className="editorial-kicker">
+                  <time dateTime={date}>
+                    {new Date(date).toLocaleDateString(siteMetadata.locale, postDateTemplate)}
+                  </time>
+                </dd>
               </dl>
-              <div>
-                <PageTitle>{title}</PageTitle>
-              </div>
+              <PageTitle>{title}</PageTitle>
             </div>
           </header>
           <div className="grid-rows-[auto_1fr] divide-y divide-slate-200 pb-8 dark:divide-slate-700 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0">
             <dl className="pb-10 pt-6 xl:border-b xl:border-slate-200 xl:pt-11 xl:dark:border-slate-700">
               <dt className="sr-only">Authors</dt>
               <dd>
-                <ul className="flex flex-wrap justify-center gap-4 sm:space-x-12 xl:block xl:space-x-0 xl:space-y-8">
+                <ul className="flex flex-wrap gap-4 sm:space-x-12 xl:block xl:space-x-0 xl:space-y-8">
                   {authorDetails.map((author) => (
                     <li className="flex items-center space-x-2" key={author.name}>
                       {author.avatar && (
@@ -81,7 +75,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                           {author.twitter && (
                             <Link
                               href={author.twitter}
-                              className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                              className="text-primary-500 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
                             >
                               {author.twitter.replace('https://twitter.com/', '@')}
                             </Link>
@@ -132,7 +126,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                         <h2 className="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
                           Previous Article
                         </h2>
-                        <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
+                        <div className="text-primary-500 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300">
                           <Link href={`/${prev.path}`}>{prev.title}</Link>
                         </div>
                       </div>
@@ -142,7 +136,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                         <h2 className="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
                           Next Article
                         </h2>
-                        <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
+                        <div className="text-primary-500 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300">
                           <Link href={`/${next.path}`}>{next.title}</Link>
                         </div>
                       </div>
@@ -153,7 +147,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
               <div className="pt-4 xl:pt-8">
                 <Link
                   href={`/${basePath}`}
-                  className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                  className="text-primary-500 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
                   aria-label="Back to the blog"
                 >
                   &larr; Back to the blog

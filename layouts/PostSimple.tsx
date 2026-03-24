@@ -25,18 +25,14 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
       <article>
         <div>
           <header>
-            <div className="space-y-1 border-b border-slate-200 pb-10 text-center dark:border-slate-700">
+            <div className="space-y-3 border-b border-slate-200 pb-10 dark:border-slate-700">
               <dl>
-                <div>
-                  <dt className="sr-only">Published on</dt>
-                  <dd className="text-base font-medium leading-6 text-slate-500 dark:text-slate-400">
-                    <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
-                  </dd>
-                </div>
+                <dt className="sr-only">Published on</dt>
+                <dd className="editorial-kicker">
+                  <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
+                </dd>
               </dl>
-              <div>
-                <PageTitle>{title}</PageTitle>
-              </div>
+              <PageTitle>{title}</PageTitle>
             </div>
           </header>
           <div className="grid-rows-[auto_1fr] divide-y divide-slate-200 pb-8 dark:divide-slate-700 xl:divide-y-0">
@@ -57,7 +53,7 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
                   <div className="pt-4 xl:pt-8">
                     <Link
                       href={`/${prev.path}`}
-                      className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                      className="text-primary-500 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
                       aria-label={`Previous post: ${prev.title}`}
                     >
                       &larr; {prev.title}
@@ -68,7 +64,7 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
                   <div className="pt-4 xl:pt-8">
                     <Link
                       href={`/${next.path}`}
-                      className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                      className="text-primary-500 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
                       aria-label={`Next post: ${next.title}`}
                     >
                       {next.title} &rarr;

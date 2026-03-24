@@ -1,7 +1,7 @@
 import 'css/tailwind.css'
 import 'pliny/search/algolia.css'
 
-import { Roboto_Mono } from 'next/font/google'
+import { Fraunces, Manrope } from 'next/font/google'
 import { Analytics, AnalyticsConfig } from 'pliny/analytics'
 import { SearchProvider, SearchConfig } from 'pliny/search'
 import Header from '@/components/Header'
@@ -11,11 +11,16 @@ import siteMetadata from '@/data/siteMetadata'
 import { ThemeProviders } from './theme-providers'
 import { Metadata } from 'next'
 
-const poppins = Roboto_Mono({
+const editorial = Fraunces({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-space-grotesk',
-  weight: '400',
+  variable: '--font-editorial',
+})
+
+const ui = Manrope({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-ui',
 })
 
 export const metadata: Metadata = {
@@ -62,7 +67,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang={siteMetadata.language}
-      className={`${poppins.variable} scroll-smooth`}
+      className={`${editorial.variable} ${ui.variable} scroll-smooth`}
       suppressHydrationWarning
     >
       <link rel="apple-touch-icon" sizes="76x76" href="/static/favicons/apple-touch-icon.png" />
@@ -71,10 +76,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <link rel="manifest" href="/static/favicons/site.webmanifest" />
       <link rel="mask-icon" href="/static/favicons/safari-pinned-tab.svg" color="#5bbad5" />
       <meta name="msapplication-TileColor" content="#000000" />
-      <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
-      <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
+      <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f0f1f5" />
+      <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0c1220" />
       <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
-      <body className="font-mono text-black antialiased bg-white dark:bg-slate-800 dark:text-white">
+      <body className="font-sans antialiased">
         <ThemeProviders>
           <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
           <SectionContainer>

@@ -19,23 +19,23 @@ interface LayoutProps {
 
 export default function PostMinimal({ content, next, prev, children }: LayoutProps) {
   const { slug, title, images } = content
-  const displayImage =
-    images && images.length > 0 ? images[0] : 'https://picsum.photos/seed/picsum/800/400'
+  const displayImage = images && images.length > 0 ? images[0] : '/static/images/twitter-card.png'
 
   return (
     <SectionContainer>
       <ScrollTopAndComment />
       <article>
         <div>
-          <div className="space-y-1 pb-10 text-center dark:border-slate-700">
+          <div className="pb-10 dark:border-slate-700">
             <div className="w-full">
               <Bleed>
-                <div className="aspect-[2/1] w-full relative">
+                <div className="relative aspect-[2/1] w-full">
                   <Image src={displayImage} alt={title} fill className="object-cover" />
                 </div>
               </Bleed>
             </div>
-            <div className="pt-10 relative">
+            <div className="relative space-y-3 pt-10">
+              <p className="editorial-kicker">{slug}</p>
               <PageTitle>{title}</PageTitle>
             </div>
           </div>
@@ -51,7 +51,7 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
                 <div className="pt-4 xl:pt-8">
                   <Link
                     href={`/${prev.path}`}
-                    className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                    className="text-primary-500 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
                     aria-label={`Previous post: ${prev.title}`}
                   >
                     &larr; {prev.title}
@@ -62,7 +62,7 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
                 <div className="pt-4 xl:pt-8">
                   <Link
                     href={`/${next.path}`}
-                    className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                    className="text-primary-500 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
                     aria-label={`Next post: ${next.title}`}
                   >
                     {next.title} &rarr;
