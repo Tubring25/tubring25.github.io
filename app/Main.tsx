@@ -2,8 +2,8 @@ import Link from '@/components/Link'
 import Image from '@/components/Image'
 import siteMetadata from '@/data/siteMetadata'
 import NextLink from 'next/link'
-import { formatDate } from 'pliny/utils/formatDate'
-import { coreContent } from 'pliny/utils/contentlayer'
+import { formatDate } from 'pliny/utils/formatDate.js'
+import { coreContent } from 'pliny/utils/contentlayer.js'
 import { allAuthors, Authors } from 'contentlayer/generated'
 
 export default function Home({ posts }) {
